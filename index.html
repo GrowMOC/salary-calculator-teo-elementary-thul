@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Increment Portal - TEO Thul</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="header">
+
+            <!-- PHOTO (replace later in GitHub as photo.jpg or niaz.jpg) -->
+            <img src="photo.jpg" class="profile" alt="TEO Niaz Ahmed Khoso">
+
+            <h2>Sindh Education & Literacy Department</h2>
+            <div class="subtitle">Government Salary Increment Portal (BPS 01 - 22)</div>
+
+            <div class="presented">
+                Presented to you by:<br>
+                <b>TEO Mr. Niaz Ahmed Khoso</b><br>
+                Taluka Thul
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Select BPS</label>
+                <select id="bps"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Basic Pay</label>
+                <input type="number" id="basicPay" placeholder="Enter Basic Pay">
+            </div>
+
+        </div>
+
+        <button onclick="calculateSalary()">Calculate Salary</button>
+
+        <div id="result"></div>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
