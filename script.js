@@ -210,3 +210,18 @@ function calculateSalary() {
         `;
     }
 }
+function handleBasicInput() {
+    calculateSalary();
+}
+
+function handleBasicBlur() {
+    calculateSalary();
+}
+
+function handlePPInput() {
+    calculateSalary();
+}
+
+function handlePPBlur() {
+    calculateSalary();
+}
