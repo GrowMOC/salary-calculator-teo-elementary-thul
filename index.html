@@ -3,56 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Salary Increment Portal - TEO Thul</title>
+
+<title>Salary Increment Calculator 2026</title>
+
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="bg"></div>
+<header class="header">
+    <h1>Salary Calculator 2026</h1>
+    <p>BPS 01 to 22 Pay Scale System</p>
+</header>
 
-<div class="container">
+<main class="container">
 
-    <div class="card">
+<!-- INPUT PANEL -->
+<section class="card">
 
-        <div class="header">
+<h2>Enter Details</h2>
 
-            <!-- PHOTO (replace later in GitHub as photo.jpg or niaz.jpg) -->
-            <img src="photo.jpg" class="profile" alt="TEO Niaz Ahmed Khoso">
+<label>BPS Scale</label>
+<select id="bpsScale" onchange="handleBpsChange()"></select>
 
-            <h2>Sindh Education & Literacy Department</h2>
-            <div class="subtitle">Government Salary Increment Portal (BPS 01 - 22)</div>
+<label>Stage</label>
+<select id="bpsStage" onchange="handleStageChange()"></select>
 
-            <div class="presented">
-                Presented to you by:<br>
-                <b>TEO Mr. Niaz Ahmed Khoso</b><br>
-                Taluka Thul
-            </div>
+<label>Basic Pay</label>
+<input type="number" id="basicPay" oninput="handleBasicInput()">
 
-        </div>
+<div id="matchFeedback"></div>
 
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>Select BPS</label>
-                <select id="bps"></select>
-            </div>
-
-            <div class="form-group">
-                <label>Basic Pay</label>
-                <input type="number" id="basicPay" placeholder="Enter Basic Pay">
-            </div>
-
-        </div>
-
-        <button onclick="calculateSalary()">Calculate Salary</button>
-
-        <div id="result"></div>
-
-    </div>
-
+<div id="personalPayGroup" style="display:none;">
+    <label>Personal Pay</label>
+    <input type="number" id="personalPay" oninput="handlePPInput()">
 </div>
 
+</section>
+
+<!-- RESULT PANEL -->
+<section class="card">
+
+<h2>Results</h2>
+
+<table border="1">
+<tr>
+    <td>Basic (2022)</td>
+    <td id="tblBasicCurrent">0</td>
+</tr>
+
+<tr>
+    <td>Basic (2026)</td>
+    <td id="tblBasicNewVal">0</td>
+</tr>
+
+<tr>
+    <td>Adhoc 2024</td>
+    <td id="tblAdhoc2024New">0</td>
+</tr>
+
+<tr>
+    <td>Adhoc 2026</td>
+    <td id="tblAdhoc2026New">0</td>
+</tr>
+
+<tr>
+    <td>Total Increase</td>
+    <td id="tblTotalIncrease">0</td>
+</tr>
+
+<tr>
+    <td>GP Fund Diff</td>
+    <td id="tblGpfDiff">0</td>
+</tr>
+
+<tr>
+    <th>Net Increase</th>
+    <th id="tblRealIncrease">0</th>
+</tr>
+
+</table>
+
+<button onclick="calculateSalary()">Calculate</button>
+
+</section>
+
+</main>
+
 <script src="script.js"></script>
+
 </body>
 </html>
