@@ -81,3 +81,132 @@ const gpfRates = {
 function formatCurrency(num) {
     return Number(num).toLocaleString('en-PK');
 }
+// ==========================================
+// PAGE INITIALIZATION
+// ==========================================
+
+window.addEventListener('DOMContentLoaded', () => {
+    handleBpsChange();
+
+    const bpsSelect = document.getElementById('bpsScale');
+    const stageSelect = document.getElementById('bpsStage');
+
+    if (bpsSelect) {
+        bpsSelect.addEventListener('change', handleBpsChange);
+    }
+
+    if (stageSelect) {
+        stageSelect.addEventListener('change', calculateSalary);
+    }
+});
+
+// ==========================================
+// BPS CHANGE
+// ==========================================
+
+function handleBpsChange() {
+
+    const bps = parseInt(document.getElementById('bpsScale').value);
+
+    const scale2022 = payScales2022[bps];
+    const scale2026 = payScales2026[bps];
+
+    if (!scale2022 || !scale2026) return;
+
+    const stageSelect = document.getElementById('bpsStage');
+
+    stageSelect.innerHTML = '';
+
+    for (let i = 0; i <= scale2022.maxStages; i++) {
+
+        const option = document.createElement('option');
+
+        option.value = i;
+
+        if (i === 0) {
+            option.textContent =
+                `Stage 0 (Rs. ${formatCurrency(scale2022.min)})`;
+        } else {
+            option.textContent =
+                `Stage ${i} (Rs. ${formatCurrency(scale2022.min + (i * scale2022.incr))})`;
+        }
+
+        stageSelect.appendChild(option);
+    }
+
+    updateScaleInfo(scale2022, scale2026);
+
+    calculateSalary();
+}
+
+// ==========================================
+// SCALE INFO
+// ==========================================
+
+function updateScaleInfo(scale2022, scale2026) {
+
+    const min2022 = document.getElementById('infoMin2022');
+    const min2026 = document.getElementById('infoMin2026');
+
+    const incr2022 = document.getElementById('infoIncr2022');
+    const incr2026 = document.getElementById('infoIncr2026');
+
+    const max2022 = document.getElementById('infoMax2022');
+    const max2026 = document.getElementById('infoMax2026');
+
+    if (min2022) min2022.textContent = formatCurrency(scale2022.min);
+    if (min2026) min2026.textContent = formatCurrency(scale2026.min);
+
+    if (incr2022) incr2022.textContent = formatCurrency(scale2022.incr);
+    if (incr2026) incr2026.textContent = formatCurrency(scale2026.incr);
+
+    if (max2022) max2022.textContent = formatCurrency(scale2022.max);
+    if (max2026) max2026.textContent = formatCurrency(scale2026.max);
+}
+
+// ==========================================
+// PLACEHOLDER CALCULATOR
+// ==========================================
+
+function calculateSalary() {
+
+    const bps =
+        parseInt(document.getElementById('bpsScale').value);
+
+    const stage =
+        parseInt(document.getElementById('bpsStage').value);
+
+    const scale2022 = payScales2022[bps];
+    const scale2026 = payScales2026[bps];
+
+    if (!scale2022 || !scale2026) return;
+
+    const basic2022 =
+        scale2022.min + (stage * scale2022.incr);
+
+    const basic2026 =
+        scale2026.min + (stage * scale2026.incr);
+
+    const resultBox =
+        document.getElementById('result');
+
+    if (resultBox) {
+
+        resultBox.innerHTML = `
+            <h3>Calculation Preview</h3>
+
+            <p><strong>BPS:</strong> ${bps}</p>
+
+            <p><strong>Stage:</strong> ${stage}</p>
+
+            <p><strong>Basic Pay 2022:</strong>
+            Rs. ${formatCurrency(basic2022)}</p>
+
+            <p><strong>Basic Pay 2026:</strong>
+            Rs. ${formatCurrency(basic2026)}</p>
+
+            <p><strong>Difference:</strong>
+            Rs. ${formatCurrency(basic2026 - basic2022)}</p>
+        `;
+    }
+}
